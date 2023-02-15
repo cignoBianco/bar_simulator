@@ -4,9 +4,9 @@ import random
 YOUR_NAME = 'Eugene'
 
 STRONG_DRINKS = ['HRENOVUHA', 'vodka', 'tekilla', 'SAMOGON']
-ALCO_DRINKS = ['wine', 'cidre', 'beer', 'b52']
+ALCO_DRINKS = ['wine', 'cidre', 'beer']
 ZERO_DRINKS = ['coffee', 'just a water, please']
-# here will be a new array
+COCKTAILS = ['b52', 'The Blue Lagoon', 'Aperol Spritz', 'Bloody Mary']
 
 def main():
     simulate_bar_party()
@@ -51,7 +51,7 @@ def look_around():
 def get_drink():
     your_choice = ''
     print('\nWhat do you prefer now:')
-    all_drinks = ALCO_DRINKS + STRONG_DRINKS + ZERO_DRINKS
+    all_drinks = ALCO_DRINKS + STRONG_DRINKS + ZERO_DRINKS + COCKTAILS
     for drink in all_drinks:
         print('- {}'.format(drink))
     while not your_choice in all_drinks and your_choice != 'random':
