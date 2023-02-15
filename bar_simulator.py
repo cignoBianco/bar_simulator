@@ -6,6 +6,7 @@ YOUR_NAME = 'Eugene'
 STRONG_DRINKS = ['HRENOVUHA', 'vodka', 'tekilla', 'SAMOGON']
 ALCO_DRINKS = ['wine', 'cidre', 'beer', 'b52']
 ZERO_DRINKS = ['coffee', 'just a water, please']
+# here will be a new array
 
 def main():
     simulate_bar_party()
