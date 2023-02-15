@@ -41,17 +41,22 @@ def simulate_bar_party():
 
 def meet(person):
     print('He told that his name is {}.\n You say: Hi, {}! I\'m {}. Nice to meet you'.format(person['name'], person['name'], you))
-    print('Good! \nWhat\'s next...')
+    if person['is_spy']:
+        print('YOU FOUND THE SPY!!!')
+    else:
+        print('Good! \nWhat\'s next...')
     return person
 
 def look_around():
-    people = [{'name': 'John', 'first_impression': 'ordinary man'},
-        {'name': 'Mary', 'first_impression': 'pretty girl'},
-        {'name': 'David', 'first_impression': 'clever looking man'},
-        {'name': 'Pablo', 'first_impression': 'dangerous man'},
-        {'name': 'Denis', 'first_impression': 'like a child'},
-        {'name': 'Sew', 'first_impression': 'very strange'},
-        {'name': 'Ann', 'first_impression': 'ordinary girl'}]
+    people = [{'name': 'John', 'first_impression': 'ordinary man', 'is_spy': False},
+        {'name': 'Mary', 'first_impression': 'pretty girl', 'is_spy': False},
+        {'name': 'David', 'first_impression': 'clever looking man', 'is_spy': False},
+        {'name': 'Pablo', 'first_impression': 'dangerous man', 'is_spy': False},
+        {'name': 'Denis', 'first_impression': 'like a child', 'is_spy': False},
+        {'name': 'Sew', 'first_impression': 'very strange', 'is_spy': False},
+        {'name': 'Ann', 'first_impression': 'ordinary girl', 'is_spy': False}]
+    people[random.randint(0, len(people) - 1)]['is_spy'] = True
+
     print('You looked around. Here are the people you saw:')
     for person in people:
         print('— {}'.format(person['first_impression']))
