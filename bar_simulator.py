@@ -37,6 +37,10 @@ def simulate_bar_party():
         meet(object_person)
         your_alco_lvl += get_drink()
         people_you_know.append(object_person)
+
+        if len(people_you_know) == 2 and not any(p['is_spy'] for p in people_you_know):
+            print('Oooops! Spy has stolen your pocket.......')
+
     print('OH MY GOT! YOURE TOO DRUNK 😣')
     spy = next(person for person in bar_people if person["is_spy"])
     print('The spy was {} {}'.format(spy['first_impression'], spy['name']))
