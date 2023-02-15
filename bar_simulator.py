@@ -66,7 +66,7 @@ def get_drink():
     while not your_choice in all_drinks and your_choice != 'random':
         your_choice = input('> ')
     if your_choice == 'random':
-        your_choice = all_drinks[random.randint(0, len(DRINKS) - 1)]
+        your_choice = all_drinks[random.randint(0, len(all_drinks) - 1)]
     if your_choice == 'HRENOVUHA':
         print('\nYou drank your HRENOVUHA. Poor you!\n')
     else:
