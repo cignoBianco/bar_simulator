@@ -6,7 +6,8 @@ YOUR_NAME = 'Eugene'
 STRONG_DRINKS = ['HRENOVUHA', 'vodka', 'tekilla', 'SAMOGON']
 ALCO_DRINKS = ['wine', 'cidre', 'beer']
 ZERO_DRINKS = ['coffee', 'just a water, please']
-COCKTAILS = ['b52', 'The Blue Lagoon', 'Aperol Spritz', 'Bloody Mary']
+COCKTAILS = {'strong':[{'name': 'b52', 'alco': 35, 'message': 'the bartender set your cocktail on fire mmm (and accidentally set your sleeve on fire, oops)'}, 'Aperol Spritz', 'Bloody Mary'], 
+            'light':['The Blue Lagoon','Tequila Sunrise']}
 
 def main():
     simulate_bar_party()
