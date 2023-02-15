@@ -38,6 +38,8 @@ def simulate_bar_party():
         your_alco_lvl += get_drink()
         people_you_know.append(object_person)
     print('OH MY GOT! YOURE TOO DRUNK 😣')
+    spy = next(person for person in bar_people if person["is_spy"])
+    print('The spy was {} {}'.format(spy['first_impression'], spy['name']))
 
 def meet(person):
     print('He told that his name is {}.\n You say: Hi, {}! I\'m {}. Nice to meet you'.format(person['name'], person['name'], you))
