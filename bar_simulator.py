@@ -26,12 +26,12 @@ def simulate_bar_party():
     people_you_know = []
 
     while your_alco_lvl < 100 and not len(people_you_know) == len(bar_people):
-        print('It\'s time to meet with somebody...\nYou choose:')
+        print('\nIt\'s time to meet with somebody...\nYou choose:')
         object_person = ''
         while not any(p['first_impression'] == object_person for p in bar_people) or any(p['first_impression'] == object_person for p in people_you_know):
             for person in bar_people:
-                print('— {}'.format(person.first_impression))
-            object_person = input('> ')
+                print('— {}'.format(person['first_impression']))
+            object_person = input('\n> ')
         
         object_person = next(person for person in bar_people if person["first_impression"] == object_person)
         meet(object_person)
@@ -40,7 +40,7 @@ def simulate_bar_party():
     print('OH MY GOT! YOURE TOO DRUNK 😣')
 
 def meet(person):
-    print('He told that his name is {}.\n You say: Hi, {}! I\'m {}. Nice to meet you'.format(person.name, person.name, you))
+    print('He told that his name is {}.\n You say: Hi, {}! I\'m {}. Nice to meet you'.format(person['name'], person['name'], you))
     print('Good! \nWhat\'s next...')
     return person
 
@@ -54,7 +54,7 @@ def look_around():
         {'name': 'Ann', 'first_impression': 'ordinary girl'}]
     print('You looked around. Here are the people you saw:')
     for person in people:
-        print('— {}'.format(person.first_impression))
+        print('— {}'.format(person['first_impression']))
     return people
 
 def get_drink():
