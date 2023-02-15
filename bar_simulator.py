@@ -26,30 +26,46 @@ def simulate_bar_party():
     people_you_know = []
 
     while your_alco_lvl < 100 and not len(people_you_know) == len(bar_people):
-        print('It\'s time to meet with somebody...\nYou choose:')
+        print('\nIt\'s time to meet with somebody...\nYou choose:')
         object_person = ''
-        while not object_person in bar_people.keys() or any(p['appearance'] == object_person for p in people_you_know):
-            for person in bar_people.keys():
-                print('— {}'.format(person))
-            object_person = input('> ')
+        while not any(p['first_impression'] == object_person for p in bar_people) or any(p['first_impression'] == object_person for p in people_you_know):
+            for person in bar_people:
+                print('— {}'.format(person['first_impression']))
+            object_person = input('\n> ')
         
-        object_person = {'appearance': object_person, 'name': bar_people[object_person]}
-        meet(object_person['name'])
+        object_person = next(person for person in bar_people if person["first_impression"] == object_person)
+        meet(object_person)
         your_alco_lvl += get_drink()
         people_you_know.append(object_person)
+
+        if len(people_you_know) == 2 and not any(p['is_spy'] for p in people_you_know):
+            print('Oooops! Spy has stolen your pocket.......')
+
     print('OH MY GOT! YOURE TOO DRUNK 😣')
+    spy = next(person for person in bar_people if person["is_spy"])
+    print('The spy was {} {}'.format(spy['first_impression'], spy['name']))
 
 def meet(person):
-    print('He told that his name is {}. You say: Hi, {}! I\'m {}. Nice to meet you'.format(person, person, you))
-    print('Good! \nWhat\'s next...')
+    print('He told that his name is {}.\n You say: Hi, {}! I\'m {}. Nice to meet you'.format(person['name'], person['name'], you))
+    if person['is_spy']:
+        print('YOU FOUND THE SPY!!!')
+    else:
+        print('Good! \nWhat\'s next...')
     return person
 
 def look_around():
-    people = {'ordinary man': 'John', 'pretty girl': 'Mary', 'clever looking man': 'David', 'dangerous man': 'Pablo',
-              'like a child': 'Denis', 'very strange': 'Sew', 'ordinary girl': 'Ann'}
+    people = [{'name': 'John', 'first_impression': 'ordinary man', 'is_spy': False},
+        {'name': 'Mary', 'first_impression': 'pretty girl', 'is_spy': False},
+        {'name': 'David', 'first_impression': 'clever looking man', 'is_spy': False},
+        {'name': 'Pablo', 'first_impression': 'dangerous man', 'is_spy': False},
+        {'name': 'Denis', 'first_impression': 'like a child', 'is_spy': False},
+        {'name': 'Sew', 'first_impression': 'very strange', 'is_spy': False},
+        {'name': 'Ann', 'first_impression': 'ordinary girl', 'is_spy': False}]
+    people[random.randint(0, len(people) - 1)]['is_spy'] = True
+
     print('You looked around. Here are the people you saw:')
-    for person in people.keys():
-        print('— {}'.format(person))
+    for person in people:
+        print('— {}'.format(person['first_impression']))
     return people
 
 def get_drink():
@@ -61,7 +77,7 @@ def get_drink():
     while not your_choice in all_drinks and your_choice != 'random':
         your_choice = input('> ')
     if your_choice == 'random':
-        your_choice = all_drinks[random.randint(0, len(DRINKS) - 1)]
+        your_choice = all_drinks[random.randint(0, len(all_drinks) - 1)]
     if your_choice == 'HRENOVUHA':
         print('\nYou drank your HRENOVUHA. Poor you!\n')
     else:
