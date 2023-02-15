@@ -1,16 +1,21 @@
 # bar simulator
 # by Anastasia Smirnova, cignoBianco, smiana123@gmail.com
 import random
-YOUR_NAME = 'Eugene'
 
 STRONG_DRINKS = ['HRENOVUHA', 'vodka', 'tekilla', 'SAMOGON']
 ALCO_DRINKS = ['wine', 'cidre', 'beer', 'b52']
 ZERO_DRINKS = ['coffee', 'just a water, please']
 
+print('''Welcome to the shalopaii bar! Present yourself!\n Hey, I\'m ...''')
+you = input('> ') 
+you = you if you else 'Guest'
+
 def main():
     simulate_bar_party()
 
 def simulate_bar_party():
+    print('Barmen say: Nice to meet you, {}'.format(you))
+
     your_alco_lvl = 0
     
     print('You came to the bar!')
@@ -35,7 +40,7 @@ def simulate_bar_party():
     print('OH MY GOT! YOURE TOO DRUNK 😣')
 
 def meet(person):
-    print('He told that his name is {}. You say: Hi, {}! I\'m {}. Nice to meet you'.format(person, person, YOUR_NAME))
+    print('He told that his name is {}. You say: Hi, {}! I\'m {}. Nice to meet you'.format(person, person, you))
     print('Good! \nWhat\'s next...')
     return person
 
