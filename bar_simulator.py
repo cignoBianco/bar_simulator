@@ -4,7 +4,7 @@ import random
 YOUR_NAME = 'Eugene'
 
 STRONG_DRINKS = ['HRENOVUHA', 'vodka', 'tekilla', 'SAMOGON']
-ALCO_DRINKS = ['wine', 'cidre', 'beer']
+ALCO_DRINKS = ['wine', 'cidre', 'beer', 'b52']
 ZERO_DRINKS = ['coffee', 'just a water, please']
 
 def main():
