@@ -2,16 +2,31 @@
 # by Anastasia Smirnova, cignoBianco, smiana123@gmail.com
 # and Anna Izgarova, ann-izgarova, izgarovaa@mail.ru
 import random
-import pandas as pd
 
-STRONG_DRINKS = ['HRENOVUHA', 'vodka', 'tekilla', 'SAMOGON']
-ALCO_DRINKS = ['wine', 'cidre', 'beer']
-ZERO_DRINKS = ['coffee', 'just a water, please']
-COCKTAILS =  pd.DataFrame([{'name': 'b52', 'alco': 35, 'message': 'The bartender set your cocktail on fire mmm (and accidentally set your sleeve on fire, oops)'},
-              {'name': 'Aperol Spritz', 'alco': 23, 'message': "Wow, you got a nice fiery orange drink, It's getting hot💦💦"},
-              {'name': 'Bloody Mary', 'alco': 25, 'message': 'Barmen bring thick red cocktail and winked ;)'}, 
-              {'name': 'The Blue Lagoon', 'alco': 10, 'message': 'After the drink are ready to dance! MY LIFE MY RULES!!!'},
-              {'name': 'Tequila Sunrise','alco': 18, 'message': 'Incredible 👏' }])
+DRINKS = {
+    'strong': [
+        {'name': 'SAMOGON', 'alco_lvl': 50, 'message': 'SOS 🚁🚁🚁 SOS Helicopters attcack!!!'},
+        {'name': 'tekilla', 'alco_lvl': 38, 'message': 'El tiempo vuela cuando te diviertes 🌮 Wanna some tacos?'},
+        {'name': 'vodka', 'alco_lvl': 40, 'message': 'Very strong choice. For a very strong person.'},
+        {'name': 'HRENOVUHA', 'alco_lvl': 60, 'message': 'You drank your HRENOVUHA. Poor you!'},
+    ],
+    'alco': [
+        {'name': 'wine', 'alco_lvl': 12, 'message': 'Is it true that if you mix white wine and red wine, you get the rose one? 🤔🧐 '},
+        {'name': 'cidre', 'alco_lvl': 5, 'message': 'Nice choice! Barmen filled your glass. Here is your apple cidre!'},
+        {'name': 'beer', 'alco_lvl': 7, 'message': '🍺 beer foam drew a mustache on you 🍻'},
+    ],
+    'cocktails': [
+        {'name': 'b52', 'alco_lvl': 35, 'message': 'The bartender set your cocktail on fire mmm (and accidentally set your sleeve on fire, oops)'},
+        {'name': 'Aperol Spritz', 'alco_lvl': 23, 'message': 'Wow, you got a nice fiery orange drink, It\'s getting hot💦💦'},
+        {'name': 'Bloody Mary', 'alco_lvl': 25, 'message': 'Barmen bring thick red cocktail and winked'},
+        {'name': 'The Blue Lagoon', 'alco_lvl': 10, 'message': 'After the drink are ready to dance! MY LIFE MY RULES!!!'},
+        {'name': 'Tequila Sunrise', 'alco_lvl': 18, 'message': 'Incredible 👏'},
+    ],
+    'zero': [
+        {'name': 'just a water, please', 'alco_lvl': 0, 'message': 'Bartender filled your glass of water 💧'},
+        {'name': 'coffee', 'alco_lvl': 0, 'message': 'Okaaay... Here is your capuccino ☕️'},
+    ]
+}
 
 print('''Welcome to the shalopaii bar! Present yourself!\n Hey, I\'m ...''')
 you = input('> ') 
@@ -60,30 +75,19 @@ def look_around():
     return people
 
 def get_drink():
-    your_choice = ''
     print('\nWhat do you prefer now:')
-    all_drinks = ALCO_DRINKS + STRONG_DRINKS + ZERO_DRINKS + list(COCKTAILS['name'])
+    all_drinks = [item for sublist in DRINKS.values() for item in sublist]
     for drink in all_drinks:
-        print('- {}'.format(drink))
-    while not your_choice in all_drinks and your_choice != 'random':
+        print('- {}'.format(drink['name']))
+    
+    your_choice = ''
+    while not any(drink['name'] == your_choice for drink in all_drinks) and your_choice != 'random':
         your_choice = input('> ')
     if your_choice == 'random':
         your_choice = all_drinks[random.randint(0, len(DRINKS) - 1)]
-    if your_choice == 'HRENOVUHA':
-        print('\nYou drank your HRENOVUHA. Poor you!\n')
-    elif your_choice in list(COCKTAILS['name']):
-        print('\n' + COCKTAILS[COCKTAILS.name == your_choice]['message'].values[0] + '\n')
-    else:
-        print('\nNice choice! Barmen filled your glass. Here is your {}!\n'.format(your_choice))
-    if your_choice in ALCO_DRINKS:
-        print('🥳')
-        return 25
-    elif your_choice in STRONG_DRINKS:
-        print('🥳🥳🥳')
-        return 50
-    elif your_choice in list(COCKTAILS['name']):
-        print('🥳🥳🥳🥳🥳🥳')
-        return int(COCKTAILS[COCKTAILS.name == your_choice]['alco'])
-    else:
-        return 0
+    else: 
+        your_choice = next(drink for drink in all_drinks if drink['name'] == your_choice)
+    
+    print('\n' + your_choice['message'] + '\n')
+    return your_choice['alco_lvl']
 main()
