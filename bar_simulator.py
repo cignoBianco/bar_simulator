@@ -33,8 +33,9 @@ OUTFITS = ['pink dress', 'business punk jacket', 'casual jeans and T-shirt',
 'farmer overalls', 'little black dress', 'dirty rags', 'sweater in harry potter style', 'bikini', 'nothing']
 APPEARENCES = ['ordinary man', 'pretty girl', 'clever looking man', 'like a child',
     'dangerous man', 'very strange', 'ordinary girl']
+space = '-'*60
 
-print('''Welcome to the shalopaii bar! Present yourself!\n Hey, I\'m ...''')
+print('''\nWelcome to the Shalopai bar! Present yourself!\n Hey, I\'m ...''')
 you = input('> ') 
 you = you if you else 'Guest'
 
@@ -42,11 +43,11 @@ def main():
     simulate_bar_party()
 
 def simulate_bar_party():
-    print('Barmen say: Nice to meet you, {}'.format(you))
+    print(space + '\nBarmen says💬: Nice to meet you, {}! Welcome to the party!'.format(you))
 
     your_alco_lvl = 0
     
-    print('You came to the bar!')
+    # print('You came to the bar!')
     your_alco_lvl += get_drink()
     bar_people = look_around()
     # get_drink()
@@ -54,7 +55,7 @@ def simulate_bar_party():
     people_you_know = []
 
     while your_alco_lvl < 100 and not len(people_you_know) == len(bar_people):
-        print('\nIt\'s time to meet with somebody...\nYou choose:')
+        print('It\'s time to meet with somebody...\nYou choose:')
         object_person = ''
         while not any(p["first_impression"] + ' wearing ' + p["outfit"] == object_person for p in bar_people) or any(p["first_impression"] + ' wearing ' + p["outfit"] == object_person for p in people_you_know):
             for person in bar_people:
@@ -71,10 +72,10 @@ def simulate_bar_party():
 
     print('OH MY GOT! YOURE TOO DRUNK 😣')
     spy = next(person for person in bar_people if person["is_spy"])
-    print('The spy was {} {}'.format(spy['first_impression'], spy['name']))
+    print('The spy was {} {}.\nNew game?\n'.format(spy['first_impression'], spy['name']))
 
 def meet(person):
-    print('He told with his {} voice, that his name is {}.\n You say: Hi, {}! I\'m {}. Nice to meet you'.format(person['voice'], person['name'], person['name'], you))
+    print(space + '\n' + 'Person tolds with the {} voice: "Сall me {}".\nYou say: Hi, {}! I\'m {}. Nice to meet you'.format(person['voice'], person['name'], person['name'], you))
     if person['is_spy']:
         print('YOU FOUND THE SPY!!!')
     else:
@@ -93,9 +94,9 @@ def look_around():
         })
     people[random.randint(0, len(people) - 1)]['is_spy'] = True
 
-    print('You looked around. Here are the people you saw:')
+    print("You looked around...👀.You know, one of people here is a spy. It's time to try your luck and find out who is the spy🕵️‍♂️\n")
     for person in people:
-        print('— {} wearing {}'.format(person['first_impression'], person['outfit']))
+        pass # print('— {} wearing {}'.format(person['first_impression'], person['outfit']))
     return people
 
 def get_drink():
@@ -112,7 +113,7 @@ def get_drink():
     else: 
         your_choice = next(drink for drink in all_drinks if drink['name'] == your_choice)
     
-    print('\n' + your_choice['message'] + '\n')
+    print(space +'\n'+ your_choice['message'] + '\n')
     return your_choice['alco_lvl']
 
 main()
